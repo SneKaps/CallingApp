@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471702806607",
+    "project_id": "callingapp-7873a",
+    "storage_bucket": "callingapp-7873a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471702806607:android:f07cbd1f7b56a96d6aca3a",
+        "android_client_info": {
+          "package_name": "com.example.callingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKDDnNfHvFVq21z7I4euFmCW2zDQ4zM_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
