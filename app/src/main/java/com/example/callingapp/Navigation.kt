@@ -19,7 +19,7 @@ fun Navigation(
 {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = "signup"){
+    NavHost(navController, startDestination = "phonelogin"){
         composable("login"){
             LoginScreen(Modifier, authViewModel, navController)
         }

@@ -75,7 +75,7 @@ class AuthViewModel: ViewModel() {
         _authState.value = AuthState.Loading
 
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber) // Phone number to verify
+            .setPhoneNumber("+91$phoneNumber") // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout duration
             .setActivity(activity) // Activity for callback binding
             .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
