@@ -15,8 +15,7 @@ import com.example.callingapp.screen.SignupScreen
 fun Navigation(
     authViewModel: AuthViewModel,
     activity: Activity
-)
-{
+) {
     val navController = rememberNavController()
 
     NavHost(navController, startDestination = "phonelogin"){

@@ -1,14 +1,19 @@
 package com.example.callingapp
 
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.callingapp.firebaseClient.FirebaseClient
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class AuthViewModel: ViewModel() {
@@ -17,6 +22,7 @@ class AuthViewModel: ViewModel() {
 
     private val _authState = MutableLiveData<AuthState>()
     val authState: LiveData<AuthState> = _authState
+    val firebaseClient = FirebaseClient()
 
     init {
         checkAuthState()
@@ -107,7 +113,11 @@ class AuthViewModel: ViewModel() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _authState.value = AuthState.Authenticated
+                    val user = task.result.user
+                    viewModelScope.launch(Dispatchers.IO) {
+                        firebaseClient.markUserOnline(user?.phoneNumber)
+                        _authState.postValue(AuthState.Authenticated)
+                    }
                 } else {
                     _authState.value = AuthState.Error(task.exception?.message ?: "Authentication failed")
                 }
